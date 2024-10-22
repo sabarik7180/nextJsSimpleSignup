@@ -2,10 +2,12 @@
 
 import { useState, ChangeEvent } from 'react';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 export default function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,6 +25,7 @@ export default function Signup() {
 
       const data = response;
       console.log(data);
+      router.push('/');
     } catch (error) {
       console.error('Error:', error);
     }
