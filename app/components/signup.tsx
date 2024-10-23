@@ -1,8 +1,9 @@
 "use client"
 
 import { useState, ChangeEvent } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import {createNewUser} from '@/app/actions/user'
 
 export default function Signup() {
   const [username, setUsername] = useState('');
@@ -14,15 +15,16 @@ export default function Signup() {
     console.log({ username, password });
 
     try {
-      const response = await axios.post('http://localhost:3000/api/signup', {
-        username,
-        password
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      });
-
+    // using server functions instead of axios 
+    const response = createNewUser(username, password)
+    //   await axios.post('http://localhost:3000/api/signup', {
+    //     username,
+    //     password
+    //   }, {
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     }
+    //   });
       const data = response;
       console.log(data);
       router.push('/');
